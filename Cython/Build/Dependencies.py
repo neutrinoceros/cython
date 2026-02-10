@@ -132,7 +132,9 @@ def parse_list(s):
             return literals[literal[1:-1]]
         else:
             return literal
-    return [unquote(item) for item in s.split(delimiter) if item.strip()]
+    raw = [unquote(item) for item in s.split(delimiter) if item.strip()]
+    # filter out any empty strings
+    return list(filter(lambda s: bool(s), raw))
 
 
 transitive_str = object()
